@@ -12,12 +12,12 @@ from vex import *
 import math as m
 # Brain should be defined by default
 brain=Brain()
-rightBack = Motor(Ports.PORT19, GearSetting.RATIO_6_1, False)
-rightFront = Motor(Ports.PORT20, GearSetting.RATIO_6_1, False)
-rightTop = Motor(Ports.PORT18, GearSetting.RATIO_6_1, True)
-leftBack = Motor(Ports.PORT13, GearSetting.RATIO_6_1, True)
-leftFront = Motor(Ports.PORT11, GearSetting.RATIO_6_1, True)
-leftTop = Motor(Ports.PORT14, GearSetting.RATIO_6_1, False)
+rightBack = Motor(Ports.PORT19, GearSetting.RATIO_6_1, True)
+rightFront = Motor(Ports.PORT20, GearSetting.RATIO_6_1, True)
+rightTop = Motor(Ports.PORT18, GearSetting.RATIO_6_1, False)
+leftBack = Motor(Ports.PORT13, GearSetting.RATIO_6_1, False)
+leftFront = Motor(Ports.PORT11, GearSetting.RATIO_6_1, False)
+leftTop = Motor(Ports.PORT14, GearSetting.RATIO_6_1, True)
 intake1 = Motor(Ports.PORT3, GearSetting.RATIO_18_1, False)
 intake2 = Motor(Ports.PORT1, GearSetting.RATIO_18_1, True )
 intake = MotorGroup(intake1, intake2)
@@ -55,8 +55,8 @@ def drive():
         leftSide.spin(FORWARD)
         axis3 = control.axis3.position()
         axis1 = ((m.e**(-2.3+2.3*abs(control.axis1.position()/100)))*sgn(control.axis1.position()/100))*100
-        leftSide.set_velocity(axis3+axis1, PERCENT)
-        rightSide.set_velocity(axis3-axis1, PERCENT)
+        leftSide.set_velocity(axis3-axis1, PERCENT)
+        rightSide.set_velocity(axis3+axis1, PERCENT)
         intake.spin(FORWARD)
         armMotor.spin(FORWARD)
         if control.buttonA.pressing() and canMogo:
@@ -74,14 +74,13 @@ def drive():
             elif slamToggle:
                 slamToggle = False
         elif not control.buttonB.pressing():
-            canSlam = True
-        
+            canSlam = True     
         if control.buttonR1.pressing():
             intake.set_velocity(100, PERCENT)
         elif control.buttonR2.pressing():
             intake.set_velocity(-100, PERCENT)
         else:
-            intake.set_velocity(0)
+            intake.stop()
         if control.buttonL1.pressing():
             armMotor.set_velocity(100, PERCENT)
         elif control.buttonL2.pressing():
