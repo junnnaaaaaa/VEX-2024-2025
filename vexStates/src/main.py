@@ -9,6 +9,7 @@
 
 # Library imports
 from vex import *
+from functions import turnLeft, turnRight, moveBackward, moveForward
 import math as m
 # Brain should be defined by default
 brain=Brain()

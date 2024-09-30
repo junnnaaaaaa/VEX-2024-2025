@@ -15,9 +15,31 @@ armMotor = Motor(Ports.PORT6, GearSetting.RATIO_36_1, True)
 control = Controller(PRIMARY)
 slam = DigitalOut(brain.three_wire_port.a)
 mogoMech = DigitalOut(brain.three_wire_port.b)
+inertia = Inertial(Ports.PORT2)
 #all auto functions 
 def example():
     pass
+def inertialTurn(position):
+    inertia.reset_heading()
+    if position > 0:
+        difference = position
+        leftSide.spin(REVERSE)
+        rightSide.spin(FORWARD)
+        while difference > 0.1:
+            difference = position - inertia.heading()
+            multi = (difference/position)*100
+            leftSide.set_velocity(multi, PERCENT)
+            rightSide.set_velocity(multi, PERCENT)
+    else:
+        difference = position
+        leftSide.spin(FORWARD)
+        rightSide.spin(REVERSE)
+        while difference > 0.1:
+            newHeading = 360-inertia.heading()
+            difference = position - newHeading
+            multi = (difference/position)*100
+            leftSide.set_velocity(multi, PERCENT)
+            rightSide.set_velocity(multi, PERCENT)
 def moveForward(amount, speed, timeOut = None):
     if not timeOut == None:
         leftSide.set_timeout(timeOut, SECONDS)
