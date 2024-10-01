@@ -140,6 +140,8 @@ def driveA():
     canMogo = True
     slamToggle = False
     canSlam = True
+    canSpin = True
+    spinToggle = False
     while True:
         if mogoToggle:
             mogoMech.set(True)
@@ -148,7 +150,11 @@ def driveA():
         if slamToggle:
             slam.set(True)
         else:
-            slam.set(False)
+            slam.set(False) 
+        if spinToggle:
+            intake.set_velocity(100)
+        else:
+            intake.stop()      
         rightSide.set_stopping(COAST)
         leftSide.set_stopping(COAST)
         rightSide.spin(FORWARD)
@@ -177,9 +183,19 @@ def driveA():
             canSlam = True     
         if control.buttonR1.pressing():
             intake.set_velocity(100, PERCENT)
+            canSpin = False
+            spinToggle = False
         elif control.buttonR2.pressing():
             intake.set_velocity(-100, PERCENT)
+            canSpin = False
+            spinToggle = False
         else:
+            if control.buttonDown.pressing() and canSpin:
+                canSpin = False 
+                if not spinToggle:
+                    spinToggle = True
+                elif spinToggle:
+                    spinToggle = False
             intake.stop()
         if control.buttonL1.pressing():
             armMotor.set_velocity(100, PERCENT)
