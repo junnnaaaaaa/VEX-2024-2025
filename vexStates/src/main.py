@@ -32,7 +32,7 @@ control = Controller(PRIMARY)
 slam = DigitalOut(brain.three_wire_port.a)
 mogoMech = DigitalOut(brain.three_wire_port.b)
 inertia = Inertial(Ports.PORT2)
-
+driveTrain = SmartDrive(leftSide, rightSide, inertia, 299.24, 320, 40, MM, 1.3333333333333333)
 #movement functions for auto
 def example():
     pass
