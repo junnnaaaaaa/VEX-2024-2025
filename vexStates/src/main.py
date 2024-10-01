@@ -32,7 +32,6 @@ control = Controller(PRIMARY)
 slam = DigitalOut(brain.three_wire_port.a)
 mogoMech = DigitalOut(brain.three_wire_port.b)
 inertia = Inertial(Ports.PORT2)
-
 #movement functions for auto
 def example():
     pass
@@ -147,14 +146,6 @@ def driveA():
             mogoMech.set(True)
         else:
             mogoMech.set(False)
-        if slamToggle:
-            slam.set(True)
-        else:
-            slam.set(False) 
-        if spinToggle:
-            intake.set_velocity(100)
-        else:
-            intake.stop()      
         rightSide.set_stopping(COAST)
         leftSide.set_stopping(COAST)
         rightSide.spin(FORWARD)
@@ -172,22 +163,12 @@ def driveA():
             elif mogoToggle:
                 mogoToggle = False
         elif not control.buttonA.pressing():
-            canMogo = True
-        if control.buttonB.pressing() and canSlam:
-            canSlam = False
-            if not slamToggle:
-                slamToggle = True
-            elif slamToggle:
-                slamToggle = False
-        elif not control.buttonB.pressing():
-            canSlam = True     
+            canMogo = True 
         if control.buttonR1.pressing():
             intake.set_velocity(100, PERCENT)
-            canSpin = False
             spinToggle = False
         elif control.buttonR2.pressing():
             intake.set_velocity(-100, PERCENT)
-            canSpin = False
             spinToggle = False
         else:
             if control.buttonDown.pressing() and canSpin:
@@ -196,7 +177,12 @@ def driveA():
                     spinToggle = True
                 elif spinToggle:
                     spinToggle = False
-            intake.stop()
+            elif not control.buttonDown.pressing():
+                canSpin = True
+            if spinToggle:
+                intake.set_velocity(100, PERCENT)
+            else:
+                intake.stop()
         if control.buttonL1.pressing():
             armMotor.set_velocity(100, PERCENT)
         elif control.buttonL2.pressing():
