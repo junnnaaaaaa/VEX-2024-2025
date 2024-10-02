@@ -20,7 +20,7 @@ rightTop = Motor(Ports.PORT18, GearSetting.RATIO_6_1, False)
 leftBack = Motor(Ports.PORT13, GearSetting.RATIO_6_1, False)
 leftFront = Motor(Ports.PORT11, GearSetting.RATIO_6_1, False)
 leftTop = Motor(Ports.PORT14, GearSetting.RATIO_6_1, True)
-intake1 = Motor(Ports.PORT3, GearSetting.RATIO_18_1, False)
+intake1 = Motor(Ports.PORT3, GearSetting.RATIO_6_1, False)
 intake2 = Motor(Ports.PORT1, GearSetting.RATIO_18_1, True )
 #assigning motor groups for drivetrain and intake
 intake = MotorGroup(intake1, intake2)
@@ -32,85 +32,9 @@ control = Controller(PRIMARY)
 slam = DigitalOut(brain.three_wire_port.a)
 mogoMech = DigitalOut(brain.three_wire_port.b)
 inertia = Inertial(Ports.PORT2)
+driveTrain = SmartDrive(leftSide, rightSide, inertia, 299.24, 320, 40, MM, 1.3333333333333333)
 #movement functions for auto
-def example():
-    pass
-def moveForward(amount, speed, timeOut = None):
-    if not timeOut == None:
-        leftSide.set_timeout(timeOut, SECONDS)
-        rightSide.set_timeout(timeOut, SECONDS)
-    leftSide.set_velocity(speed, PERCENT)
-    rightSide.set_velocity(speed, PERCENT)
-    leftSide.spin_for(FORWARD, amount, TURNS, wait=False)
-    rightSide.spin_for(FORWARD, amount, TURNS)
-    leftSide.set_timeout(60, SECONDS)
-    rightSide.set_timeout(60, SECONDS)
-def moveBackward(amount, speed, timeOut = None):
-    if not timeOut == None:
-        leftSide.set_timeout(timeOut, SECONDS)
-        rightSide.set_timeout(timeOut, SECONDS)
-    leftSide.set_velocity(speed, PERCENT)
-    rightSide.set_velocity(speed, PERCENT)
-    leftSide.spin_for(REVERSE, amount, TURNS, wait=False)
-    rightSide.spin_for(REVERSE, amount, TURNS)
-    leftSide.set_timeout(60, SECONDS)
-    rightSide.set_timeout(60, SECONDS)
-def turnLeft(amount, speed, timeOut = None):
-    if not timeOut == None:
-        leftSide.set_timeout(timeOut, SECONDS)
-        rightSide.set_timeout(timeOut, SECONDS)
-    leftSide.set_velocity(speed, PERCENT)
-    rightSide.set_velocity(speed, PERCENT)
-    leftSide.spin_for(FORWARD, amount, TURNS, wait=False)
-    rightSide.spin_for(REVERSE, amount, TURNS)
-    leftSide.set_timeout(60, SECONDS)
-    rightSide.set_timeout(60, SECONDS)
-def turnRight(amount, speed, timeOut = None):
-    if not timeOut == None:
-        leftSide.set_timeout(timeOut, SECONDS)
-        rightSide.set_timeout(timeOut, SECONDS)
-    leftSide.set_velocity(speed, PERCENT)
-    rightSide.set_velocity(speed, PERCENT)
-    leftSide.spin_for(REVERSE, amount, TURNS, wait=False)
-    rightSide.spin_for(FORWARD, amount, TURNS)
-    leftSide.set_timeout(60, SECONDS)
-    rightSide.set_timeout(60, SECONDS)
-def inertialTurn(position):
-    global multi, difference, newHeading, preMulti
-    inertia.reset_heading()
-    if position > 0:
-        difference = position
-        leftSide.spin(FORWARD)
-        rightSide.spin(FORWARD)
-        multi = 100
-        preMulti = 1
-        brain.screen.print("initial turn")
-        turnRight(0.2, 100)
-        while inertia.heading() < position:
-            #global multi, difference
-            #difference = position - inertia.heading()
-            #preMulti = difference/position
-            #if preMulti > 1:
-            #    preMulti = 1
-            #multi = abs((preMulti)*100)
-            leftSide.set_velocity(-50, PERCENT)
-            rightSide.set_velocity(50, PERCENT)
-        control.screen.print("done right turn")
-        leftSide.stop()
-        rightSide.stop()
-    else:
-        difference = position
-        leftSide.spin(FORWARD)
-        rightSide.spin(REVERSE)
-        while not 0.1 < difference < -3:
-            newHeading = 360-inertia.heading()
-            difference = position - newHeading
-            multi = (difference/position)*100
-            leftSide.set_velocity(multi, PERCENT)
-            rightSide.set_velocity(multi, PERCENT)
-            brain.screen.print(difference)
-        leftSide.stop()
-        rightSide.stop()
+
 
    
 def sgn(x): #sign function. makes everything positive or negative one
@@ -131,9 +55,21 @@ def preAuto():
     control.screen.set_cursor(1,1)
     control.screen.print("Inertial Sensor Done")
 def auto():
+    mogoMech.set(False)
     leftSide.set_stopping(HOLD)
     rightSide.set_stopping(HOLD)
-    inertialTurn(90)
+    driveTrain.drive_for(REVERSE, 200, MM)
+    mogoMech.set(True)
+    #intake.spin(FORWARD)
+    #intake.set_velocity(100, PERCENT)
+    #driveTrain.turn_to_rotation(100, DEGREES)
+    #driveTrain.drive_for(FORWARD, 100, MM)
+    #driveTrain.turn_to_rotation(80, DEGREES)
+    #driveTrain.drive_for(FORWARD, 100, MM)
+    #driveTrain.drive_for(REVERSE, 100, MM)
+    #mogoMech.set(False)
+    #driveTrain.turn_to_rotation(0, DEGREES)
+    #driveTrain.drive_for(FORWARD, 100, MM)
 def driveA():
     mogoToggle = False
     canMogo = True
