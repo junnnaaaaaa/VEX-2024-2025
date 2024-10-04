@@ -59,18 +59,18 @@ def auto():
     mogoMech.set(False)
     leftSide.set_stopping(HOLD)
     rightSide.set_stopping(HOLD)
-    driveTrain.drive_for(REVERSE, 1200, MM, 25, PERCENT)
+    driveTrain.drive_for(REVERSE, 1300, MM, 25, PERCENT)
     mogoMech.set(True)
     intake.spin(FORWARD)
     intake.set_velocity(100, PERCENT)
-    driveTrain.turn_for(LEFT, 0.3, TURNS, 40, PERCENT)
-    #driveTrain.drive_for(FORWARD, 100, MM)
-    #driveTrain.turn_to_rota#ition(80, DEGREES)
-    #driveTrain.drive_for(FORWARD, 100, MM)
-    #driveTrain.drive_for(REVERSE, 100, MM)
-    #mogoMech.set(False)
-    #driveTrain.turn_to_rotation(0, DEGREES)
-    #driveTrain.drive_for(FORWARD, 100, MM)
+    driveTrain.turn_for(LEFT, 0.3, TURNS, 20, PERCENT) #0.3 = 90 degrees
+    driveTrain.drive_for(FORWARD, 1600, MM, 45, PERCENT)
+    driveTrain.turn_for(LEFT,0.35,TURNS, 20, PERCENT)
+    driveTrain.drive_for(FORWARD, 600, MM, 40, PERCENT)
+    driveTrain.drive_for(FORWARD, 1000, MM, 40, PERCENT)
+    mogoMech.set(False)
+    driveTrain.turn_for(LEFT, 0.3, TURNS, 20, PERCENT)
+    driveTrain.drive_for(FORWARD, 2000, MM)
 def driveA():
     mogoToggle = False
     canMogo = True
