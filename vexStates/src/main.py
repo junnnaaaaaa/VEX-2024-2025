@@ -55,6 +55,7 @@ def preAuto():
     control.screen.set_cursor(1,1)
     control.screen.print("Inertial Sensor Done")
 def auto():
+    #note, reverse left and right becuase it is cooked for some reason
     mogoMech.set(False)
     leftSide.set_stopping(HOLD)
     rightSide.set_stopping(HOLD)
@@ -62,7 +63,7 @@ def auto():
     mogoMech.set(True)
     intake.spin(FORWARD)
     intake.set_velocity(100, PERCENT)
-    driveTrain.turn_for(RIGHT, 1, TURNS, 40, PERCENT)
+    driveTrain.turn_for(LEFT, 0.3, TURNS, 40, PERCENT)
     #driveTrain.drive_for(FORWARD, 100, MM)
     #driveTrain.turn_to_rota#ition(80, DEGREES)
     #driveTrain.drive_for(FORWARD, 100, MM)
