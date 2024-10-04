@@ -32,7 +32,7 @@ control = Controller(PRIMARY)
 slam = DigitalOut(brain.three_wire_port.a)
 mogoMech = DigitalOut(brain.three_wire_port.b)
 inertia = Inertial(Ports.PORT2)
-driveTrain = SmartDrive(leftSide, rightSide, inertia, 299.24, 320, 40, MM, 1.3333333333333333)
+driveTrain = DriveTrain(leftSide, rightSide, 319.19, 295, 230, MM, 1.3333333333333333)
 #movement functions for auto
 
 #test change
@@ -58,11 +58,11 @@ def auto():
     mogoMech.set(False)
     leftSide.set_stopping(HOLD)
     rightSide.set_stopping(HOLD)
-    driveTrain.drive_for(REVERSE, 200, MM)
+    driveTrain.drive_for(REVERSE, 1200, MM, 25, PERCENT)
     mogoMech.set(True)
     intake.spin(FORWARD)
-    #intake.set_velocity(100, PERCENT)
-    #driveTrain.turn_to_rotation(100, DEGREES)
+    intake.set_velocity(100, PERCENT)
+    driveTrain.turn_for(RIGHT, 1, TURNS, 40, PERCENT)
     #driveTrain.drive_for(FORWARD, 100, MM)
     #driveTrain.turn_to_rota#ition(80, DEGREES)
     #driveTrain.drive_for(FORWARD, 100, MM)
