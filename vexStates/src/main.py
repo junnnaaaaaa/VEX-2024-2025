@@ -35,7 +35,7 @@ inertia = Inertial(Ports.PORT2)
 driveTrain = SmartDrive(leftSide, rightSide, inertia, 299.24, 320, 40, MM, 1.3333333333333333)
 #movement functions for auto
 
-
+#test change
    
 def sgn(x): #sign function. makes everything positive or negative one
     if x == 0:
@@ -60,11 +60,11 @@ def auto():
     rightSide.set_stopping(HOLD)
     driveTrain.drive_for(REVERSE, 200, MM)
     mogoMech.set(True)
-    #intake.spin(FORWARD)
+    intake.spin(FORWARD)
     #intake.set_velocity(100, PERCENT)
     #driveTrain.turn_to_rotation(100, DEGREES)
     #driveTrain.drive_for(FORWARD, 100, MM)
-    #driveTrain.turn_to_rotation(80, DEGREES)
+    #driveTrain.turn_to_rota#ition(80, DEGREES)
     #driveTrain.drive_for(FORWARD, 100, MM)
     #driveTrain.drive_for(REVERSE, 100, MM)
     #mogoMech.set(False)
