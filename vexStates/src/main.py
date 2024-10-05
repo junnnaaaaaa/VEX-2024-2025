@@ -20,10 +20,9 @@ rightTop = Motor(Ports.PORT18, GearSetting.RATIO_6_1, False)
 leftBack = Motor(Ports.PORT13, GearSetting.RATIO_6_1, False)
 leftFront = Motor(Ports.PORT11, GearSetting.RATIO_6_1, False)
 leftTop = Motor(Ports.PORT14, GearSetting.RATIO_6_1, True)
-intake1 = Motor(Ports.PORT3, GearSetting.RATIO_6_1, False)
-intake2 = Motor(Ports.PORT1, GearSetting.RATIO_18_1, True )
+intake = Motor(Ports.PORT3, GearSetting.RATIO_18_1, True )
 #assigning motor groups for drivetrain and intake
-intake = MotorGroup(intake1, intake2)
+
 rightSide = MotorGroup(rightBack, rightFront, rightTop)
 leftSide = MotorGroup(leftBack, leftFront, leftTop)
 #assigning non motor ports
@@ -62,7 +61,6 @@ def auto():
     driveTrain.drive_for(REVERSE, 300, MM, 25, PERCENT)
     intake.spin(FORWARD)
     wait(0.5,SECONDS)
-    intake.spin(HOLD)
     driveTrain.drive_for(REVERSE, 1000, MM, 25, PERCENT)
     mogoMech.set(True)
     intake.set_velocity(80, PERCENT)
