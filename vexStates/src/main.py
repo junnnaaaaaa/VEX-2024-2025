@@ -20,7 +20,7 @@ rightTop = Motor(Ports.PORT18, GearSetting.RATIO_6_1, False)
 leftBack = Motor(Ports.PORT13, GearSetting.RATIO_6_1, False)
 leftFront = Motor(Ports.PORT11, GearSetting.RATIO_6_1, False)
 leftTop = Motor(Ports.PORT14, GearSetting.RATIO_6_1, True)
-intake = Motor(Ports.PORT3, GearSetting.RATIO_18_1, True )
+intake = Motor(Ports.PORT3, GearSetting.RATIO_18_1, False)
 #assigning motor groups for drivetrain and intake
 
 rightSide = MotorGroup(rightBack, rightFront, rightTop)
