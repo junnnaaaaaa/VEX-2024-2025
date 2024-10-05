@@ -20,7 +20,7 @@ rightTop = Motor(Ports.PORT18, GearSetting.RATIO_6_1, False)
 leftBack = Motor(Ports.PORT13, GearSetting.RATIO_6_1, False)
 leftFront = Motor(Ports.PORT11, GearSetting.RATIO_6_1, False)
 leftTop = Motor(Ports.PORT14, GearSetting.RATIO_6_1, True)
-intake = Motor(Ports.PORT3, GearSetting.RATIO_18_1, True )
+intake = Motor(Ports.PORT3, GearSetting.RATIO_18_1, False )
 #assigning motor groups for drivetrain and intake
 
 rightSide = MotorGroup(rightBack, rightFront, rightTop)
@@ -58,7 +58,25 @@ def auto():
     mogoMech.set(False)
     leftSide.set_stopping(HOLD)
     rightSide.set_stopping(HOLD)
-        
+    driveTrain.drive_for(REVERSE, 100, MM, 25, PERCENT)   
+    mogoMech.set(True) 
+    intake.spin(FORWARD)
+    #driveTrain.turn_for(LEFT, 0.6, TURNS, 50, PERCENT)
+    #driveTrain.drive_for(FORWARD, 1000, MM, 25, PERCENT)
+    #driveTrain.turn_for(RIGHT, 0.3, TURNS, 50, PERCENT)
+    #driveTrain.drive_for(FORWARD, 1000, MM, 25, PERCENT)
+    #driveTrain.turn_for(RIGHT, 0.3, TURNS, 50, PERCENT)
+    #driveTrain.drive_for(FORWARD, 500, MM, 25, PERCENT)
+    #driveTrain.turn_for(RIGHT, 0.15, TURNS, 50, PERCENT)
+    #driveTrain.drive_for(FORWARD, 500, MM, 25, PERCENT)
+    #driveTrain.turn_for(LEFT, 0.3, TURNS, 50, PERCENT)
+    #driveTrain.drive_for(FORWARD, 500, MM, 25, PERCENT)
+    #intake.stop()
+    #driveTrain.turn_for(RIGHT, 0.4, TURNS, 50, PERCENT)
+    #driveTrain.drive_for(REVERSE, 100, MM, 25, PERCENT)   
+    #mogoMech.set(False)
+    #driveTrain.drive_for(FORWARD, 500, MM, 25, PERCENT)
+    
 def driveA():
     mogoToggle = False
     canMogo = True
