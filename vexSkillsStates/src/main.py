@@ -62,33 +62,32 @@ def auto():
     driveTrain.drive_for(REVERSE, 400, MM, 25, PERCENT)   
     mogoMech.set(True) 
     intake.spin(FORWARD)
-    driveTrain.turn_for(LEFT, 0.585, TURNS, 100, PERCENT) #180 turn
+    wait(0.2, SECONDS)
+    driveTrain.turn_for(LEFT, 0.58, TURNS, 100, PERCENT) #180 turn
     wait(0.1, SECONDS)
     intake.set_velocity(100, PERCENT)
     driveTrain.drive_for(FORWARD, 1400, MM, 25, PERCENT)
     intake.set_velocity(30, PERCENT)
     wait(0.1, SECONDS)
-    driveTrain.turn_for(RIGHT, 0.27, TURNS, 50, PERCENT) #90 turn
+    driveTrain.turn_for(RIGHT, 0.29, TURNS, 40, PERCENT) #90 turn
     wait(0.1, SECONDS)
     intake.set_velocity(100, PERCENT)
-    driveTrain.drive_for(FORWARD, 1900, MM, 40, PERCENT)
-    driveTrain.turn_for(RIGHT, 0.25, TURNS, 50, PERCENT)
-    driveTrain.drive_for(FORWARD, 500, MM, 25, PERCENT)
+    driveTrain.drive_for(FORWARD, 1300, MM, 40, PERCENT)
     intake.set_velocity(30, PERCENT)
-    driveTrain.turn_for(RIGHT, 0.2, TURNS, 50, PERCENT)
+    driveTrain.turn_for(RIGHT, 0.29, TURNS, 40, PERCENT)
+    wait(0.1, SECONDS)
     intake.set_velocity(100, PERCENT)
+    driveTrain.drive_for(FORWARD, 1700, MM, 40, PERCENT)
     wait(0.5, SECONDS)
-    driveTrain.drive_for(FORWARD, 500, MM, 25, PERCENT)
+    driveTrain.drive_for(REVERSE, 400, MM, 25, PERCENT)   
+    driveTrain.turn_for(LEFT, 0.32, TURNS, 40, PERCENT)     
+    driveTrain.drive_for(FORWARD, 300, MM, 40, PERCENT)   
     wait(0.5, SECONDS)
-    driveTrain.turn_for(LEFT, 0.15, TURNS, 50, PERCENT)
-    driveTrain.drive_for(FORWARD, 500, MM, 25, PERCENT)
-    wait(0.5, SECONDS)
-    driveTrain.turn_for(RIGHT, 0.45, TURNS, 50, PERCENT)
-    driveTrain.drive_for(REVERSE, 500, MM, 25, PERCENT)   
-    intake.stop()
+    driveTrain.turn_for(LEFT, 0.4, TURNS, 40, PERCENT)
+    driveTrain.drive_for(REVERSE, 600, MM, 25, PERCENT)   
     mogoMech.set(False)
-    driveTrain.drive_for(FORWARD, 500, MM, 25, PERCENT)
-    
+    driveTrain.drive_for(REVERSE, 200, MM, 100, PERCENT)   
+    driveTrain.drive_for(FORWARD, 800, MM, 100, PERCENT)   
 def driveA():
     mogoToggle = False
     canMogo = True
