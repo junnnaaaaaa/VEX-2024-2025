@@ -58,21 +58,25 @@ def auto():
     mogoMech.set(False)
     leftSide.set_stopping(HOLD)
     rightSide.set_stopping(HOLD)
-    driveTrain.drive_for(FORWARD, 100, MM, 100, PERCENT)
+    driveTrain.drive_for(REVERSE, 200, MM, 100, PERCENT)
     driveTrain.drive_for(REVERSE, 1800, MM, 30, PERCENT)
     mogoMech.set(True)
-    driveTrain.turn_for(LEFT, 0.35, TURNS, 30, PERCENT) #0.3 = 90 degrees
+    driveTrain.turn_for(LEFT, 0.34, TURNS, 30, PERCENT) #0.3 = 90 degrees
     intake.set_velocity(100, PERCENT)
     driveTrain.drive_for(FORWARD, 100, MM, 30, PERCENT)
     intake.spin(FORWARD)
-    driveTrain.drive_for(FORWARD, 1100, MM, 70, PERCENT)
-    driveTrain.drive_for(FORWARD, 100, MM, 30, PERCENT)
-    driveTrain.turn_for(LEFT, 0.33, TURNS, 30, PERCENT) #0.3 = 90 degrees
-    driveTrain.drive_for(FORWARD, 600, MM, 70, PERCENT)
     wait(0.5, SECONDS)
-    driveTrain.drive_for(REVERSE, 1000, MM, 50, PERCENT)
+    driveTrain.drive_for(FORWARD, 1300, MM, 70, PERCENT)
+    driveTrain.drive_for(FORWARD, 100, MM, 30, PERCENT)
+    driveTrain.turn_for(LEFT, 0.32, TURNS, 30, PERCENT) #0.3 = 90 degrees
+    driveTrain.drive_for(FORWARD, 450, MM, 70, PERCENT)
+    wait(1, SECONDS)
+    driveTrain.drive_for(REVERSE, 650, MM, 50, PERCENT)
     driveTrain.turn_for(LEFT, 0.34, TURNS, 30, PERCENT) #0.3 = 90 degrees
-    
+    driveTrain.drive_for(REVERSE, 70, MM, 100, PERCENT)
+    driveTrain.drive_for(FORWARD, 70, MM, 100, PERCENT)
+    mogoMech.set(False)
+    driveTrain.drive_for(FORWARD, 2000, MM, 30, PERCENT)
         
 def driveA():
     mogoToggle = False
