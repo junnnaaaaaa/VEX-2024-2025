@@ -72,7 +72,7 @@ def auto():
     driveTrain.drive_for(FORWARD, 450, MM, 70, PERCENT)
     wait(1, SECONDS)
     driveTrain.drive_for(REVERSE, 650, MM, 50, PERCENT)
-    driveTrain.turn_for(RIGHT, 0.34, TURNS, 30, PERCENT) #0.3 = 90 degrees
+    driveTrain.turn_for(RIGHT, 0.35, TURNS, 30, PERCENT) #0.3 = 90 degrees
     driveTrain.drive_for(REVERSE, 70, MM, 100, PERCENT)
     driveTrain.drive_for(FORWARD, 70, MM, 100, PERCENT)
     mogoMech.set(False)
