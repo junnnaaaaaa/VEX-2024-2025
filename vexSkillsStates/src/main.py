@@ -63,7 +63,7 @@ def auto():
     mogoMech.set(True) 
     intake.spin(FORWARD)
     wait(0.2, SECONDS)
-    driveTrain.turn_for(LEFT, 0.58, TURNS, 100, PERCENT) #180 turn
+    driveTrain.turn_for(LEFT, 0.56, TURNS, 100, PERCENT) #180 turn
     wait(0.1, SECONDS)
     intake.set_velocity(100, PERCENT)
     driveTrain.drive_for(FORWARD, 1400, MM, 25, PERCENT)
