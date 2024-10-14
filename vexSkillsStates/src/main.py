@@ -54,38 +54,42 @@ def preAuto():
     control.screen.set_cursor(1,1)
     control.screen.print("Inertial Sensor Done")
 def auto():
-    #note, reverse left and right becuase it is cooked for some reason
-    driveTrain.set_timeout(6, SECONDS)
-    mogoMech.set(False)
-    driveTrain.set_stopping(HOLD)
-    driveTrain.drive_for(REVERSE, 100, MM, 100, PERCENT)   
-    driveTrain.drive_for(REVERSE, 400, MM, 25, PERCENT)   
-    mogoMech.set(True) 
-    intake.spin(FORWARD)
-    wait(0.2, SECONDS)
-    driveTrain.turn_for(LEFT, 0.56, TURNS, 100, PERCENT) #180 turn
+    #note, reverse left and right
+    driveTrain.set_timeout(6, SECONDS) #setting timeout to avoid issues with it being stuck
+    mogoMech.set(False) #ensuring mogoMech is off at the start of the program
+    driveTrain.set_stopping(HOLD) #set stopping to hold for more accurate driving
+    driveTrain.drive_for(REVERSE, 100, MM, 100, PERCENT) #reverse quickly to try to bring front intake down
+    driveTrain.drive_for(REVERSE, 400, MM, 25, PERCENT)  #reverse to goal
+    mogoMech.set(True) #grab goal
+    intake.spin(FORWARD) 
+    wait(0.2, SECONDS) #give intake time to put on preload and 
+    driveTrain.turn_for(LEFT, 0.56, TURNS, 100, PERCENT) #180 turn, also turns so intake is at front to pick up rings
     wait(0.1, SECONDS)
     intake.set_velocity(100, PERCENT)
-    driveTrain.drive_for(FORWARD, 1400, MM, 25, PERCENT)
-    intake.set_velocity(30, PERCENT)
+    driveTrain.drive_for(FORWARD, 1400, MM, 25, PERCENT) #drives to get rings
+    intake.set_velocity(30, PERCENT) #slows intake down to avoid flinging rings off
     wait(0.1, SECONDS)
-    driveTrain.turn_for(RIGHT, 0.29, TURNS, 40, PERCENT) #90 turn
+    driveTrain.turn_for(RIGHT, 0.29, TURNS, 40, PERCENT) #90 turn, points towards more rings
+    wait(0.1, SECONDS) 
+    intake.set_velocity(100, PERCENT) #sets intake back to max speed
+    driveTrain.drive_for(FORWARD, 1300, MM, 40, PERCENT) #grabs next ring
+    intake.set_velocity(30, PERCENT)#slows intake down to avoid flinging rings off
+    driveTrain.turn_for(RIGHT, 0.29, TURNS, 40, PERCENT) #turns to next set of rings
     wait(0.1, SECONDS)
-    intake.set_velocity(100, PERCENT)
-    driveTrain.drive_for(FORWARD, 1300, MM, 40, PERCENT)
-    intake.set_velocity(30, PERCENT)
-    driveTrain.turn_for(RIGHT, 0.29, TURNS, 40, PERCENT)
-    wait(0.1, SECONDS)
-    intake.set_velocity(100, PERCENT)
-    driveTrain.drive_for(FORWARD, 1700, MM, 40, PERCENT)
-    wait(0.5, SECONDS)
-    driveTrain.drive_for(REVERSE, 400, MM, 25, PERCENT)   
-    driveTrain.turn_for(LEFT, 0.32, TURNS, 40, PERCENT)     
+    intake.set_velocity(100, PERCENT) #sets intake back to max speed
+    driveTrain.drive_for(FORWARD, 1700, MM, 40, PERCENT) #gets next to rings
+    wait(0.5, SECONDS) #waits to allow rings to go into the intake
+    #moves back then turns for last ring
+    driveTrain.drive_for(REVERSE, 400, MM, 25, PERCENT)  
+    driveTrain.turn_for(LEFT, 0.32, TURNS, 40, PERCENT)
+    #grabs final ring     
     driveTrain.drive_for(FORWARD, 300, MM, 40, PERCENT)   
     wait(0.5, SECONDS)
-    driveTrain.turn_for(LEFT, 0.4, TURNS, 40, PERCENT)
-    driveTrain.drive_for(REVERSE, 600, MM, 25, PERCENT)   
+    driveTrain.turn_for(LEFT, 0.4, TURNS, 40, PERCENT) #turns to correct angle for putting goal in corner
+    #puts goal in corner
+    driveTrain.drive_for(REVERSE, 600, MM, 25, PERCENT)  
     mogoMech.set(False)
+    #shakes goal and drives out
     driveTrain.drive_for(REVERSE, 200, MM, 100, PERCENT)   
     driveTrain.drive_for(FORWARD, 800, MM, 100, PERCENT)   
 def driveA():

@@ -54,29 +54,31 @@ def preAuto():
     control.screen.set_cursor(1,1)
     control.screen.print("Inertial Sensor Done")
 def auto():
-    #note, reverse left and right becuase it is cooked for some reason
+    #note, reverse left and right
     mogoMech.set(False)
     leftSide.set_stopping(HOLD)
     rightSide.set_stopping(HOLD)
-    driveTrain.drive_for(REVERSE, 200, MM, 100, PERCENT)
-    driveTrain.drive_for(REVERSE, 1800, MM, 30, PERCENT)
-    mogoMech.set(True)
-    driveTrain.turn_for(LEFT, 0.34, TURNS, 30, PERCENT) #0.3 = 90 degrees
+    driveTrain.drive_for(REVERSE, 200, MM, 100, PERCENT) #jerk backward to try to bring the front intake down
+    driveTrain.drive_for(REVERSE, 1800, MM, 30, PERCENT) #mooves backwards to the goal
+    mogoMech.set(True) #grabs goal
+    driveTrain.turn_for(LEFT, 0.34, TURNS, 30, PERCENT) #0.3 roughly is 90 degrees, also turns to grab goal
     intake.set_velocity(100, PERCENT)
-    driveTrain.drive_for(FORWARD, 100, MM, 30, PERCENT)
+    driveTrain.drive_for(FORWARD, 100, MM, 30, PERCENT) #drives forward a bit towards next ring
     intake.spin(FORWARD)
-    wait(0.5, SECONDS)
-    driveTrain.drive_for(FORWARD, 1300, MM, 70, PERCENT)
-    driveTrain.drive_for(FORWARD, 100, MM, 30, PERCENT)
-    driveTrain.turn_for(LEFT, 0.32, TURNS, 30, PERCENT) #0.3 = 90 degrees
-    driveTrain.drive_for(FORWARD, 450, MM, 70, PERCENT)
-    wait(1, SECONDS)
-    driveTrain.drive_for(REVERSE, 650, MM, 50, PERCENT)
-    driveTrain.turn_for(LEFT, 0.34, TURNS, 30, PERCENT) #0.3 = 90 degrees
+    wait(0.5, SECONDS) # gives the intake time to flick the front intake down, incase the first bit doesnt work. also puts the preload on the goal
+    driveTrain.drive_for(FORWARD, 1300, MM, 70, PERCENT) #grabs first ring
+    driveTrain.drive_for(FORWARD, 100, MM, 30, PERCENT) #slows down to ensure grabbing
+    driveTrain.turn_for(LEFT, 0.32, TURNS, 30, PERCENT)  #turns to last ring
+    driveTrain.drive_for(FORWARD, 450, MM, 70, PERCENT) #moves to grab last ring
+    wait(1, SECONDS) #since the robot risks crossing the line, we cant move very far, so we have to give it time for the intake to work
+    driveTrain.drive_for(REVERSE, 650, MM, 50, PERCENT)#reverses back away from stack
+    driveTrain.turn_for(LEFT, 0.34, TURNS, 30, PERCENT) #turns to direction for touching pole
+    #final jiggle to make sure all rings go on
     driveTrain.drive_for(REVERSE, 70, MM, 100, PERCENT)
     driveTrain.drive_for(FORWARD, 70, MM, 100, PERCENT)
-    mogoMech.set(False)
-    driveTrain.drive_for(FORWARD, 2000, MM, 30, PERCENT)
+    mogoMech.set(False) #lets go of mogo
+    driveTrain.drive_for(FORWARD, 2000, MM, 30, PERCENT) #drives to touch middle structure. 
+    #note: leave intake on so it climbs the structure, ensuring that its touching it
         
 def driveA():
     mogoToggle = False
